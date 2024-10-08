@@ -10,6 +10,13 @@ const nextConfig = {
       "logos-world.net",
     ],
   },
+  experimental: {
+    serverActions: {
+      bodyParser: {
+        sizeLimit: '10mb',
+      }
+    }
+  }
 };
 
 module.exports = nextConfig;
