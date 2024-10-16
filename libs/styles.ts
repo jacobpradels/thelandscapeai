@@ -1,4 +1,5 @@
 export const styles = {
+  "None": [""],
   Modern: [
     "clean lines",
     "minimalist design",

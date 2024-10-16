@@ -1,10 +1,9 @@
 import HeroSection from "@/components/Custom/Hero";
 import Header from "@/components/Custom/Header";
 import FeaturesSection from "@/components/Custom/Features";
-import ExamplesSection from "@/components/Custom/Examples";
 import Footer from "@/components/Custom/Footer";
-import FAQ from "@/components/FAQ";
 import Pricing from "@/components/Pricing";
+import Gallery from "@/components/Custom/Gallery";
 
 export default function LandingPage() {
   return (
@@ -13,8 +12,7 @@ export default function LandingPage() {
       <main className="flex-1 w-full flex flex-col items-center">
         <HeroSection />
         <FeaturesSection />
-        <ExamplesSection />
-        <FAQ />
+        <Gallery />
         <Pricing />
       </main>
       <Footer />

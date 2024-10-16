@@ -1,6 +1,10 @@
 import Link from "next/link";
 import ButtonAccount from "@/components/ButtonAccount";
 import DashboardPanel from "@/components/Custom/Dashboard/DashboardPanel";
+import connectMongo from "@/libs/mongoose";
+import User from "@/models/User";
+import { getServerSession } from "next-auth";
+
 
 const DashboardHeader = () => {
   return (
@@ -16,10 +20,15 @@ const DashboardHeader = () => {
   )
 }
 export default async function Dashboard() {
+  const session = await getServerSession();
+  console.log(session);
+  await connectMongo();
+  const user = await User.findOne({ email: session.user.email });
+  console.log(user);
   return (
     <main className="min-h-screen w-full flex flex-col">
       <DashboardHeader />
-      <DashboardPanel />
+      <DashboardPanel user_id={user.email} />
     </main>
   );
 }

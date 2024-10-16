@@ -1,13 +1,21 @@
 import Replicate from "replicate";
 import { NextRequest, NextResponse } from 'next/server';
 import sharp from 'sharp';
+import { putObject } from '@/libs/aws/s3/put';
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
 export async function POST(req: NextRequest) {
-  const { image, prompt } = await req.json();
+  const {
+    image,
+    prompt,
+    creativity,
+    control_type,
+    user_id,
+    metadata
+  } = await req.json();
   // Convert image from base64 to buffer
   const imageBuffer = Buffer.from(image.split(',')[1], 'base64');
 
@@ -31,18 +39,30 @@ export async function POST(req: NextRequest) {
     steps: 28,
     negative_prompt: "low quality, ugly, distorted, artifacts",
     control_strength: 0.45,
-    image_to_image_strength: 0.2,
-    control_type: "canny",
+    image_to_image_strength: 1 - (creativity / 100),
+    control_type: control_type,
   }
   const output = await replicate.run("xlabs-ai/flux-dev-controlnet:f2c31c31d81278a91b2447a304dae654c64a5d5a70340fba811bb1cbd41019a2", { input });
 
   // Get the output URL, fetch the image, and convert it to base64
-  const outputUrl = output[0] as string;
+  const outputUrl = (output as any)[0] as string;
   const response = await fetch(outputUrl);
   const blob = await response.blob();
   const arrayBuffer = await blob.arrayBuffer();
   const base64String = Buffer.from(arrayBuffer).toString('base64');
   const outputImageBase64 = `data:${response.headers.get('content-type') || 'image/png'};base64,${base64String}`;
+
+  const fileName = `${user_id}/${Date.now()}.png`;
+  const fileType = response.headers.get('content-type') || 'image/png';
+  const success = await putObject(
+    fileName,
+    fileType,
+    outputImageBase64,
+    metadata
+  );
+  if (!success) {
+    return NextResponse.json({ error: 'Failed to upload to S3' }, { status: 500 });
+  }
 
   return NextResponse.json({ image: outputImageBase64 }, { status: 200 });
 }

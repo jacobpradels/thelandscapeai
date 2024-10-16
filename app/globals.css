@@ -60,4 +60,21 @@ progress::-webkit-progress-value {
   color: white;
 }
 
+.animated-gradient-border {
+  border-image: linear-gradient(60deg,
+      #f79533,
+      #f37055,
+      #ef4e7b,
+      #a166ab,
+      #5073b8,
+      #1098ad,
+      #07b39b,
+      #6fba82,
+      #f79533) 1;
+  border-image-slice: 1;
+  border-width: 2px;
+  border-style: solid;
+  animation: gradient-animation 10s linear infinite;
+}
+
 @layer base {}

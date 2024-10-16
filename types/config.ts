@@ -41,6 +41,7 @@ export interface ConfigProps {
       features: {
         name: string;
       }[];
+      credits: number;
     }[];
   };
   aws?: {

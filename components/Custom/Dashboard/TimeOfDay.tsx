@@ -4,7 +4,10 @@ import { Sunrise, Sunset, Sun, Moon } from "lucide-react";
 const TimeOfDay = ({ timeOfDay, setTimeOfDay }: { timeOfDay: number, setTimeOfDay: (timeOfDay: number) => void }) => {
   return (
     <div>
-      <label className="label uppercase font-bold">Time of Day</label>
+      <label className="label uppercase font-bold">
+        Time of Day
+        <span className="text-xs text-white/50">beta</span>
+      </label>
       <input
         type="range"
         min={0}

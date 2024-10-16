@@ -1,4 +1,23 @@
 import Link from "next/link";
+import { Menu } from "lucide-react";
+import ButtonAccount from "@/components/ButtonAccount";
+import ButtonSignin from "@/components/ButtonSignin";
+
+const links = [
+  {
+    name: "How it works",
+    href: "#features",
+  },
+  {
+    name: "Examples",
+    href: "#examples",
+  },
+  {
+    name: "Pricing",
+    href: "#pricing",
+  },
+]
+
 const Header = () => {
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center justify-between w-full bg-black text-white">
@@ -8,20 +27,36 @@ const Header = () => {
           <span className="font-medium text-xl">AI</span>
         </div>
       </Link>
-      <nav className="ml-auto flex gap-4 sm:gap-6">
-        <Link className="text-sm font-medium hover:underline underline-offset-4" href="#features">
-          How it works
-        </Link>
-        <Link className="text-sm font-medium hover:underline underline-offset-4" href="#examples">
-          Examples
-        </Link>
-        <Link className="text-sm font-medium hover:underline underline-offset-4" href="#faq">
-          FAQ
-        </Link>
-        <Link className="text-sm font-medium hover:underline underline-offset-4" href="#pricing">
-          Pricing
-        </Link>
+      <div className="dropdown dropdown-end sm:hidden">
+        <div tabIndex={0} role="button" className="bg-black text-white">
+          <Menu className="h-6 w-6" />
+        </div>
+        <ul
+          tabIndex={0}
+          className="menu dropdown-content animated-gradient-background rounded-box z-[1] mt-4 w-52 p-2 shadow border-2 border-white">
+          {links.map((link) => (
+            <li
+              key={link.name}
+              className="hover:bg-white hover:text-black rounded-md w-full"
+            >
+              <Link className="text-sm font-medium hover:underline underline-offset-4" href={link.href}>
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <nav className="ml-auto hidden sm:flex gap-4 sm:gap-6">
+        {links.map((link) => (
+          <Link className="text-sm font-medium hover:underline underline-offset-4" key={link.name} href={link.href}>
+            {link.name}
+          </Link>
+        ))}
       </nav>
+      <div className="ml-4">
+        <ButtonSignin />
+        {/* <ButtonAccount /> */}
+      </div>
     </header>
   );
 }

@@ -29,7 +29,7 @@ const OptionalFeatures = ({ optionalFeatures, setOptionalFeatures }: { optionalF
         <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-full max-w-xs p-2 shadow text-white block overflow-x-hidden overflow-y-auto max-h-48 sm:max-h-64">
           {filteredFeatures.length === 0 ? (
             <li className="text-center min-h-8 flex items-center justify-center">
-              Press enter to add "{search}"
+              Press enter to add &quot;{search}&quot;
             </li>
           ) : (
             filteredFeatures.map((feature) => (

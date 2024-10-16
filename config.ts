@@ -9,7 +9,7 @@ const config = {
   appDescription:
     "The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
-  domainName: "shipfa.st",
+  domainName: "thelandscapeai.com",
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
     id: "",
@@ -26,21 +26,21 @@ const config = {
             ? "price_1Niyy5AxyNprDp7iZIqEyD2h"
             : "price_456",
         //  REQUIRED - Name of the plan, displayed on the pricing page
-        name: "Starter",
+        name: "Basic Plan",
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
-        description: "Perfect for small projects",
+        description: "Perfect for getting started",
         // The price you want to display, the one user will be charged on Stripe.
-        price: 99,
+        price: 9,
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
-        priceAnchor: 149,
+        priceAnchor: 14,
         features: [
           {
-            name: "NextJS boilerplate",
+            name: "Generate 50 AI Images",
           },
-          { name: "User oauth" },
-          { name: "Database" },
-          { name: "Emails" },
+          { name: "Images saved for 1 hour" },
+          { name: "Full access to all features" },
         ],
+        credits: 50,
       },
       {
         priceId:
@@ -49,20 +49,18 @@ const config = {
             : "price_456",
         // This plan will look different on the pricing page, it will be highlighted. You can only have one plan with isFeatured: true
         isFeatured: true,
-        name: "Advanced",
+        name: "Premium Plan",
         description: "You need more power",
-        price: 149,
-        priceAnchor: 299,
+        price: 39,
+        priceAnchor: 49,
         features: [
           {
-            name: "NextJS boilerplate",
+            name: "Generate 250 AI Images",
           },
-          { name: "User oauth" },
-          { name: "Database" },
-          { name: "Emails" },
-          { name: "1 year of updates" },
-          { name: "24/7 support" },
+          { name: "Images saved for 1 month" },
+          { name: "Full access to all features" },
         ],
+        credits: 250,
       },
     ],
   },

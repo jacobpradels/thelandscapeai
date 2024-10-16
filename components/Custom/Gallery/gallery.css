@@ -1,0 +1,42 @@
+.gallery-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: nowrap;
+  overflow-x: clip;
+  width: 110vw;
+}
+
+.gallery-row.right {
+  left: -5vw;
+  animation: slide 30s linear infinite;
+}
+
+.gallery-row.left {
+  right: -5vw;
+  animation: slide-left 30s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-5vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+

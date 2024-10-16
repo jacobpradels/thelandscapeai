@@ -82,6 +82,7 @@ export async function POST(req: NextRequest) {
         user.priceId = priceId;
         user.customerId = customerId;
         user.hasAccess = true;
+        user.credits += plan.credits;
         await user.save();
 
         // Extra: send email with user link, product page, etc...

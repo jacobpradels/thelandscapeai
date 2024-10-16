@@ -1,38 +1,61 @@
-import { Camera, Sparkles } from "lucide-react";
+import Image from "next/image";
 import Arrow from "@/components/Custom/Icons/Arrow";
+
+const imagePrefix = process.env.NODE_ENV === "development" ? "/images" : "https://thelandscapeai-photos.s3.us-east-2.amazonaws.com"
 
 const FeaturesSection = () => {
   return (
-    <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-base-200 flex justify-center items-center bg-black text-white h-[75vh] border">
-      <div className="container px-4 md:px-6 flex justify-center items-center">
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex items-center gap-2 text-2xl">
-            <Camera className="w-6 h-6" />
-            Snap a Photo
+    <div
+      id="features"
+      className="
+        w-full bg-base-200 flex justify-center
+        items-center bg-black text-white min-h-[75vh]
+        py-12 px-2
+      "
+    >
+      <div className="h-full w-full flex flex-col items-center justify-center">
+        <span className="text-center text-4xl mb-4 leading-relaxed md:leading-normal">
+          Reimagine your yard in <span className="animated-gradient-background font-extrabold p-1">seconds</span>
+        </span>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 h-full">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-full aspect-video rounded-xl overflow-hidden">
+              <Image src={`${imagePrefix}/home.jpg`} alt="Placeholder" width={500} height={300} objectFit="cover" />
+            </div>
           </div>
-          <div className="h-[30vh] w-[50vh] border border-white rounded-xl">
-            image_placeholder
-          </div>
-        </div>
-        <Arrow extraStyle="w-12 -rotate-90 -scale-x-100" />
-        <div className="flex flex-col items-center gap-2 text-2xl">
-          AI Magic
-          <div className="h-[30vh] w-[20vh] border">
-            placeholder
-          </div>
-        </div>
-        <Arrow extraStyle="w-12 -rotate-90" />
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex items-center gap-2 text-2xl">
-            <Sparkles className="w-6 h-6" />
-            Stunning Results
-          </div>
-          <div className="h-[30vh] w-[50vh] border border-white rounded-xl">
-            image_placeholder
+          <Arrow extraStyle="stroke-white fill-white h-12 w-12 md:-rotate-90 -scale-x-100" />
+          <div className="h-[600px] w-[400px] rounded-xl flex flex-col items-center justify-center gap-0 sm:-gap-8">
+            <div className="w-full rounded-md -rotate-6 z-10 overflow-hidden">
+              <Image
+                src={`${imagePrefix}/english-cottage.jpeg`}
+                alt="Placeholder"
+                width={500}
+                height={300}
+                className="-translate-y-10"
+              />
+            </div>
+            <div className="w-full rounded-md overflow-hidden z-20">
+              <Image
+                src={`${imagePrefix}/home-after.jpeg`}
+                alt="Placeholder"
+                width={500}
+                height={300}
+                className="-translate-y-10"
+              />
+            </div>
+            <div className="w-full object-fit overflow-hidden rounded-md -rotate-6 md:rotate-6 z-30">
+              <Image
+                src={`${imagePrefix}/mediterannean.jpeg`}
+                alt="Placeholder"
+                width={500}
+                height={300}
+                className="-translate-y-10"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
