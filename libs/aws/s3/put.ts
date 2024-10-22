@@ -6,9 +6,9 @@ export const putObject = async (
   fileName: string,
   fileType: string,
   base64Image: string,
-  expiration: Date = new Date(Date.now() + ONE_MONTH_IN_MS),
   metadata: Record<string, string> = {}
 ) => {
+  const expiration = new Date(Date.now() + ONE_MONTH_IN_MS)
   try {
     const buffer = Buffer.from(base64Image.split(',')[1], 'base64');
 

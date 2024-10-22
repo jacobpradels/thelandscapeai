@@ -62,7 +62,9 @@ const ButtonAccount = () => {
               </span>
             )}
 
-            {session?.user?.name || "Account"}
+            <span className="hidden lg:block">
+              {session?.user?.name || "Account"}
+            </span>
 
             {isLoading ? (
               <span className="loading loading-spinner loading-xs"></span>

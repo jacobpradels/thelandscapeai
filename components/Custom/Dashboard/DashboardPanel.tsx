@@ -98,8 +98,8 @@ const DashboardPanel = ({ user_id }: { user_id: string }) => {
       try {
         const prompt = await handleChat(
           style !== "None" ? `I want to create a ${style} landscape, which can be described as ${styles[style].join(", ")}. ` : "I want to create a landscape. "
-          + `Additionally, I want to add the following features: ${optionalFeatures.join(", ")}. `
-          + `Please modify this prompt: ${caption}`);
+            + `Additionally, I want to add the following features: ${optionalFeatures.join(", ")}. `
+            + `Please modify this prompt: ${caption}`);
         console.log(prompt);
         console.log("Starting generation");
         const response = await fetch('/api/main/generate/replicate', {
@@ -116,6 +116,12 @@ const DashboardPanel = ({ user_id }: { user_id: string }) => {
             creativity: creativity,
             control_type: controlTypeFromProcessMode(processMode),
             user_id: user_id,
+            metadata: {
+              "style": style,
+              "optionalFeatures": JSON.stringify(optionalFeatures),
+              "processMode": processMode,
+              "creativity": creativity.toString(),
+            }
           }),
         });
 
@@ -130,15 +136,9 @@ const DashboardPanel = ({ user_id }: { user_id: string }) => {
     }
   }
 
-  // const handleUpload = async () => {
-  //   const response = await fetch('/api/aws/s3/put', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ fileName: "test.jpg", fileType: "image/jpg", base64Image: selectedImage }),
-  //   });
-  // }
+  if (!user_id) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="w-full h-full flex-col-reverse sm:flex-row flex-grow flex text-white">
@@ -172,10 +172,17 @@ const DashboardPanel = ({ user_id }: { user_id: string }) => {
           <Creativity creativity={creativity} setCreativity={setCreativity} />
         </div>
         <div className="flex justify-center">
-          {isLoading ? <div className="loading loading-spinner loading-md" /> : <button
-            className="btn w-full animated-gradient-background border-none"
-            onClick={handleGenerate}
-          >Generate</button>}
+          {isLoading ? (
+            <div className="flex items-center gap-2">
+              <div className="loading loading-spinner loading-md" />
+              <span>Generating...</span>
+            </div>
+          ) : (
+            <button
+              className="btn w-full animated-gradient-background border-none"
+              onClick={handleGenerate}
+            >Generate</button>
+          )}
         </div>
       </div>
       {/* Preview */}

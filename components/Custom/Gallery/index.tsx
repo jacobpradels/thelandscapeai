@@ -33,7 +33,14 @@ const Gallery = () => {
         <div key={rowIndex} className={`flex gallery-row ${rowIndex % 2 === 0 ? 'gallery-row right' : 'gallery-row left'}`}>
           {row.map((image, index) => (
             <div key={index} className="aspect-video">
-              <Image src={image} alt="Gallery" width={500} height={300} className="rounded-md hover:scale-105 transition-all duration-300" />
+              <Image
+                src={image}
+                alt="Gallery"
+                sizes="100vw"
+                width={500}
+                height={300}
+                className="rounded-md hover:scale-105 transition-all duration-300"
+              />
             </div>
           ))}
         </div>

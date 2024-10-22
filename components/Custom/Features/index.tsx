@@ -28,7 +28,7 @@ const FeaturesSection = () => {
             <div className="w-full rounded-md -rotate-6 z-10 overflow-hidden">
               <Image
                 src={`${imagePrefix}/english-cottage.jpeg`}
-                alt="Placeholder"
+                alt="English Cottage"
                 width={500}
                 height={300}
                 className="-translate-y-10"
@@ -37,7 +37,7 @@ const FeaturesSection = () => {
             <div className="w-full rounded-md overflow-hidden z-20">
               <Image
                 src={`${imagePrefix}/home-after.jpeg`}
-                alt="Placeholder"
+                alt="Home After"
                 width={500}
                 height={300}
                 className="-translate-y-10"
@@ -46,7 +46,7 @@ const FeaturesSection = () => {
             <div className="w-full object-fit overflow-hidden rounded-md -rotate-6 md:rotate-6 z-30">
               <Image
                 src={`${imagePrefix}/mediterannean.jpeg`}
-                alt="Placeholder"
+                alt="Mediterannean"
                 width={500}
                 height={300}
                 className="-translate-y-10"

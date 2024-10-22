@@ -64,4 +64,7 @@ export interface ConfigProps {
     loginUrl: string;
     callbackUrl: string;
   };
+  s3: {
+    aws_prefix: string;
+  }
 }

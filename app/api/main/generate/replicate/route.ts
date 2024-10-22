@@ -2,12 +2,18 @@ import Replicate from "replicate";
 import { NextRequest, NextResponse } from 'next/server';
 import sharp from 'sharp';
 import { putObject } from '@/libs/aws/s3/put';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/libs/next-auth";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
 export async function POST(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   const {
     image,
     prompt,
