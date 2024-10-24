@@ -26,7 +26,7 @@ const config = {
             ? "price_1Niyy5AxyNprDp7iZIqEyD2h"
             : "price_456",
         //  REQUIRED - Name of the plan, displayed on the pricing page
-        name: "Basic Plan",
+        name: "Basic",
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
         description: "Perfect for getting started",
         // The price you want to display, the one user will be charged on Stripe.
@@ -49,7 +49,7 @@ const config = {
             : "price_456",
         // This plan will look different on the pricing page, it will be highlighted. You can only have one plan with isFeatured: true
         isFeatured: true,
-        name: "Premium Plan",
+        name: "Premium",
         description: "You need more power",
         price: 39,
         priceAnchor: 49,

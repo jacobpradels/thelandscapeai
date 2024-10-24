@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import { Viewport } from "next";
 import PlausibleProvider from "next-plausible";
@@ -20,7 +19,7 @@ export const viewport: Viewport = {
 // You can override them in each page passing params to getSOTags() function.
 export const metadata = getSEOTags();
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: any }) {
   return (
     <html lang="en" data-theme={config.colors.theme} className={`${font.className} bg-black`}>
       {config.domainName && (

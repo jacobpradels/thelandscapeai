@@ -25,7 +25,7 @@ const Preview = ({ selectedImage, outputImage }: { selectedImage: string; output
           <img
             src={selectedImage}
             alt="Preview"
-            className="w-full object-cover rounded-lg"
+            className="h-full object-contain rounded-lg"
           />
         ) : (
           <div className="text-white/50 text-3xl font-bold uppercase select-none text-center">

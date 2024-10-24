@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center justify-between w-full bg-black text-white">
       <div className="flex items-center gap-4">
-        <Link className="flex items-center justify-center gap-2 animated-gradient-text" href="/">
+        <Link className="flex items-center justify-center gap-2 animated-gradient-text" href="/dashboard">
           <div className="space-x-1">
             <span className="font-bold text-xl">LANDSCAPE</span>
             <span className="font-medium text-xl">AI</span>

@@ -6,6 +6,7 @@ import OptionalFeatures from "@/components/Custom/Dashboard/OptionalFeatures";
 import Preview from "@/components/Custom/Dashboard/Preview";
 import Creativity from "./Creativity";
 import ProcessMode from "./ProcessMode";
+import BuyCreditsModal from "./BuyCreditsModal";
 
 const interrogateImage = async (image: string | ArrayBuffer) => {
   const response = await fetch('/api/main/interrogate', {
@@ -45,7 +46,7 @@ const handleChat = async (msg: string) => {
   return data.response;
 }
 
-const DashboardPanel = ({ user_id }: { user_id: string }) => {
+const DashboardPanel = ({ user_id, credits }: { user_id: string, credits: number }) => {
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [caption, setCaption] = React.useState("");
@@ -54,6 +55,7 @@ const DashboardPanel = ({ user_id }: { user_id: string }) => {
   const [optionalFeatures, setOptionalFeatures] = React.useState<string[]>([]);
   const [creativity, setCreativity] = React.useState(50);
   const [processMode, setProcessMode] = React.useState("Depth");
+  const [warning, setWarning] = React.useState("");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files[0];
@@ -81,6 +83,10 @@ const DashboardPanel = ({ user_id }: { user_id: string }) => {
   }
 
   const handleGenerate = async () => {
+    if (credits <= 0) {
+      (document.getElementById('my_modal_1') as HTMLDialogElement).showModal();
+      return;
+    }
     if (style && selectedImage && !isLoading) {
       setIsLoading(true);
       let captionRes = null;
@@ -142,6 +148,7 @@ const DashboardPanel = ({ user_id }: { user_id: string }) => {
 
   return (
     <div className="w-full h-full flex-col-reverse sm:flex-row flex-grow flex text-white">
+      <BuyCreditsModal />
       <div className="w-full sm:w-1/4 bg-black p-4 flex flex-col gap-4 shrink-0 grow-0 justify-between">
         <div className="overflow-y-auto overflow-x-hidden flex flex-col gap-4">
           <label className="label uppercase font-bold">Upload Image</label>

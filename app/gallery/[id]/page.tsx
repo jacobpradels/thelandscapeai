@@ -66,7 +66,7 @@ const GalleryImagePage = async ({ params }: { params: { id: string } }) => {
           </div>
           <div className="form-control">
             <label className="label cursor-pointer">
-              <span className="label-text text-md">Compare with original</span>
+              <span className="label-text text-lg">Compare with original</span>
               <input type="checkbox" className="toggle" defaultChecked />
             </label>
           </div>

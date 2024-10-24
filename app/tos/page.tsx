@@ -12,15 +12,15 @@ import config from "@/config";
 // You are an excellent lawyer.
 
 // I need your help to write a simple Terms & Services for my website. Here is some context:
-// - Website: https://shipfa.st
-// - Name: ShipFast
-// - Contact information: marc@shipfa.st
-// - Description: A JavaScript code boilerplate to help entrepreneurs launch their startups faster
-// - Ownership: when buying a package, users can download code to create apps. They own the code but they do not have the right to resell it. They can ask for a full refund within 7 day after the purchase.
+// - Website: https://thelandscapeai.com
+// - Name: Landscape AI
+// - Contact information: jacob@thelandscapeai.com
+// - Description: A Generative AI tool to help you create beautiful landscape image concepts for your projects
+// - Ownership: You own the images you create with Landscape AI.
 // - User data collected: name, email and payment information
 // - Non-personal data collection: web cookies
-// - Link to privacy-policy: https://shipfa.st/privacy-policy
-// - Governing Law: France
+// - Link to privacy-policy: https://thelandscapeai.com/privacy-policy
+// - Governing Law: United States
 // - Updates to the Terms: users will be updated by email
 
 // Please write a simple Terms & Services for my site. Add the current date. Do not add or explain your reasoning. Answer:
@@ -57,39 +57,33 @@ const TOS = () => {
           className="leading-relaxed whitespace-pre-wrap"
           style={{ fontFamily: "sans-serif" }}
         >
-          {`Last Updated: September 26, 2023
+          {`Terms & Services for Landscape AI
 
-Welcome to ShipFast!
+Effective Date: October 23, 2024
 
-These Terms of Service ("Terms") govern your use of the ShipFast website at https://shipfa.st ("Website") and the services provided by ShipFast. By using our Website and services, you agree to these Terms.
+Welcome to Landscape AI. By using our website, https://thelandscapeai.com, you agree to the following Terms & Services.
 
-1. Description of ShipFast
+1. Ownership of Images
 
-ShipFast is a platform that offers a JavaScript code boilerplate to assist entrepreneurs in launching their startups more efficiently.
+You retain full ownership of any images you create using Landscape AI.
 
-2. Ownership and Usage Rights
+2. User Information
 
-When you purchase a package from ShipFast, you gain the right to download and use the code provided for creating applications. You own the code you create but do not have the right to resell it. We offer a full refund within 7 days of purchase, as specified in our refund policy.
+We collect personal information (name, email, payment information) to process your orders. We also collect non-personal data (web cookies) to enhance your experience. For more details, see our Privacy Policy at https://thelandscapeai.com/privacy-policy.
 
-3. User Data and Privacy
+3. Governing Law
 
-We collect and store user data, including name, email, and payment information, as necessary to provide our services. For details on how we handle your data, please refer to our Privacy Policy at https://shipfa.st/privacy-policy.
+These terms are governed by the laws of the United States.
 
-4. Non-Personal Data Collection
+4. Changes to Terms
 
-We use web cookies to collect non-personal data for the purpose of improving our services and user experience.
+We may update these Terms & Services from time to time. You will be notified of any changes via email.
 
-5. Governing Law
+5. Contact Information
 
-These Terms are governed by the laws of France.
+If you have any questions, please contact us at jacob@thelandscapeai.com.
 
-6. Updates to the Terms
-
-We may update these Terms from time to time. Users will be notified of any changes via email.
-
-For any questions or concerns regarding these Terms of Service, please contact us at marc@shipfa.st.
-
-Thank you for using ShipFast!`}
+These Terms & Services are in effect as of the date listed above.`}
         </pre>
       </div>
     </main>

@@ -3,9 +3,13 @@ import Replicate from 'replicate';
 import Image from '@/models/Image';
 import crypto from 'crypto';
 import connectMongo from '@/libs/mongoose';
-
+import { assertAuthenticated } from "@/libs/assert_authenticated";
 
 export async function POST(req: NextRequest) {
+  const authenticated = await assertAuthenticated();
+  if (!authenticated) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   try {
     const { image } = await req.json();
 

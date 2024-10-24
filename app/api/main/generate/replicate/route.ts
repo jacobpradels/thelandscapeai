@@ -2,18 +2,19 @@ import Replicate from "replicate";
 import { NextRequest, NextResponse } from 'next/server';
 import sharp from 'sharp';
 import { putObject } from '@/libs/aws/s3/put';
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/libs/next-auth";
+import { assertAuthenticated } from "@/libs/assert_authenticated";
+import { updatePendingImages } from "@/libs/update_pending_images";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
 export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  if (!session) {
+  const authenticated = await assertAuthenticated();
+  if (!authenticated) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
   const {
     image,
     prompt,
@@ -22,6 +23,7 @@ export async function POST(req: NextRequest) {
     user_id,
     metadata
   } = await req.json();
+
   // Convert image from base64 to buffer
   const imageBuffer = Buffer.from(image.split(',')[1], 'base64');
 
@@ -48,9 +50,10 @@ export async function POST(req: NextRequest) {
     image_to_image_strength: 1 - (creativity / 100),
     control_type: control_type,
   }
+  await updatePendingImages(1);
   const output = await replicate.run("xlabs-ai/flux-dev-controlnet:f2c31c31d81278a91b2447a304dae654c64a5d5a70340fba811bb1cbd41019a2", { input });
+  await updatePendingImages(-1);
 
-  // Get the output URL, fetch the image, and convert it to base64
   const outputUrl = (output as any)[0] as string;
   const response = await fetch(outputUrl);
   const blob = await response.blob();

@@ -1,7 +1,12 @@
 import { NextResponse } from 'next/server';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { assertAuthenticated } from "@/libs/assert_authenticated";
 
 export async function POST(request: Request) {
+  const authenticated = await assertAuthenticated();
+  if (!authenticated) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   try {
     console.log("Uploading to S3");
     const { fileName, fileType, base64Image } = await request.json();

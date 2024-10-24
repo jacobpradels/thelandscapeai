@@ -4,7 +4,10 @@
 import { useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { useSession, signOut } from "next-auth/react";
+import React from "react";
 import apiClient from "@/libs/api";
+import getCredits from "@/libs/get_credits";
+import { Coins } from "lucide-react";
 
 // A button to show user some account actions
 //  1. Billing: open a Stripe Customer Portal to manage their billing (cancel subscription, update payment method, etc.).
@@ -15,6 +18,16 @@ import apiClient from "@/libs/api";
 const ButtonAccount = () => {
   const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [credits, setCredits] = useState<number | null>(null);
+
+  React.useEffect(() => {
+    (async () => {
+      if (session?.user) {
+        const credits = await getCredits();
+        setCredits(credits);
+      }
+    })();
+  }, [session]);
 
   const handleSignOut = () => {
     signOut({ callbackUrl: "/" });
@@ -73,9 +86,8 @@ const ButtonAccount = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className={`w-5 h-5 duration-200 opacity-50 ${
-                  open ? "transform rotate-180 " : ""
-                }`}
+                className={`w-5 h-5 duration-200 opacity-50 ${open ? "transform rotate-180 " : ""
+                  }`}
               >
                 <path
                   fillRule="evenodd"
@@ -96,6 +108,13 @@ const ButtonAccount = () => {
             <Popover.Panel className="absolute left-0 z-10 mt-3 w-screen max-w-[16rem] transform">
               <div className="overflow-hidden rounded-xl shadow-xl ring-1 ring-base-content ring-opacity-5 bg-base-100 p-1">
                 <div className="space-y-0.5 text-sm">
+                  <button
+                    className="flex items-center gap-2 hover:bg-warning/20 hover:text-warning duration-200 py-1.5 px-4 w-full rounded-lg font-medium"
+                    onClick={handleSignOut}
+                  >
+                    <Coins className="w-5 h-5" />
+                    {credits} Credits
+                  </button>
                   <button
                     className="flex items-center gap-2 hover:bg-base-300 duration-200 py-1.5 px-4 w-full rounded-lg font-medium"
                     onClick={handleBilling}
