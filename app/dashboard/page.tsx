@@ -9,10 +9,11 @@ export default async function Dashboard() {
   const session = await getServerSession(authOptions);
   await connectMongo();
   const user = await User.findOne({ email: session?.user.email });
+  console.log(user);
   return (
     <main className="min-h-screen w-full flex flex-col">
       <Header />
-      <DashboardPanel user_id={session?.user.id} credits={user?.credits} />
+      <DashboardPanel user_id={session?.user.id} credits={user?.credits} is_premium={user?.isPremium} />
     </main>
   );
 }

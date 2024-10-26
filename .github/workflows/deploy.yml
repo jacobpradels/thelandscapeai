@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - uses: actions/checkout@v3
+      - name: Render SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+          chmod 700 ~/.ssh
+      - name: Install dependencies
+        run: npm install
+      - run: npm run build
+      - run: echo "Build complete."
+      # - run: scp -r .next root@${{ secrets.DEPLOY_HOST }}:/src/thelandscapeai
+      - name: Sync .next folder
+        run: rsync -avz --delete .next root@${{ secrets.DEPLOY_HOST }}:/src/thelandscapeai/.next

@@ -83,6 +83,9 @@ export async function POST(req: NextRequest) {
         user.customerId = customerId;
         user.hasAccess = true;
         user.credits += plan.credits;
+        if (plan.name === "Premium") {
+          user.isPremium = true;
+        }
         await user.save();
 
         // Extra: send email with user link, product page, etc...

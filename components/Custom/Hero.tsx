@@ -1,5 +1,8 @@
 import { Camera, CheckCircle } from "lucide-react";
 import Google from "@/components/Custom/Icons/Google";
+import Login from "@/components/Custom/Login";
+
+
 const HeroSection = () => {
   return (
     <section className="w-full flex justify-center items-center bg-black text-white">
@@ -16,20 +19,7 @@ const HeroSection = () => {
             Trusted by 10,000+ homeowners
           </div>
         </div>
-        <div className="relative">
-          <h2 className="absolute text-xl font-bold bg-black left-[5%] px-2">Get Started</h2>
-          <div className="flex flex-col gap-2 bg-black rounded-lg text-white border-2 p-4 my-3">
-            <input type="text" className="p-2 rounded-md input text-white w-72" placeholder="Type your email..." ></input>
-            <button className="btn btn-md border-none animated-gradient-background">
-              Create My Yard
-              <Camera className="ml-2 h-4 w-4" />
-            </button>
-            <button className="btn btn-md">
-              <Google className="ml-2 h-4 w-4" />
-              Continue with Google
-            </button>
-          </div>
-        </div>
+        <Login />
       </div>
     </section>
   );

@@ -4,6 +4,9 @@ import sharp from 'sharp';
 import { putObject } from '@/libs/aws/s3/put';
 import { assertAuthenticated } from "@/libs/assert_authenticated";
 import { updatePendingImages } from "@/libs/update_pending_images";
+import User from '@/models/User';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/libs/next-auth";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
@@ -15,13 +18,23 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const session = await getServerSession(authOptions);
+  const user = await User.findById(session?.user?.id);
+
+  if (user.credits <= 0) {
+    return NextResponse.json({ error: 'Insufficient credits' }, { status: 400 });
+  }
+  user.credits -= 1;
+  await user.save();
+
   const {
     image,
     prompt,
     creativity,
     control_type,
     user_id,
-    metadata
+    metadata,
+    is_premium,
   } = await req.json();
 
   // Convert image from base64 to buffer
@@ -67,7 +80,8 @@ export async function POST(req: NextRequest) {
     fileName,
     fileType,
     outputImageBase64,
-    metadata
+    is_premium ? 1000 * 60 * 60 * 24 * 30 : 60 * 60 * 1000,
+    metadata,
   );
   if (!success) {
     return NextResponse.json({ error: 'Failed to upload to S3' }, { status: 500 });

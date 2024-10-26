@@ -46,7 +46,7 @@ const handleChat = async (msg: string) => {
   return data.response;
 }
 
-const DashboardPanel = ({ user_id, credits }: { user_id: string, credits: number }) => {
+const DashboardPanel = ({ user_id, credits, is_premium }: { user_id: string, credits: number, is_premium: boolean }) => {
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [caption, setCaption] = React.useState("");
@@ -55,7 +55,6 @@ const DashboardPanel = ({ user_id, credits }: { user_id: string, credits: number
   const [optionalFeatures, setOptionalFeatures] = React.useState<string[]>([]);
   const [creativity, setCreativity] = React.useState(50);
   const [processMode, setProcessMode] = React.useState("Depth");
-  const [warning, setWarning] = React.useState("");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files[0];
@@ -127,7 +126,8 @@ const DashboardPanel = ({ user_id, credits }: { user_id: string, credits: number
               "optionalFeatures": JSON.stringify(optionalFeatures),
               "processMode": processMode,
               "creativity": creativity.toString(),
-            }
+            },
+            is_premium: is_premium,
           }),
         });
 

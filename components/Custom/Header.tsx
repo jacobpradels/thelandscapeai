@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Menu } from "lucide-react";
-import ButtonAccount from "@/components/ButtonAccount";
-import ButtonSignin from "@/components/ButtonSignin";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/libs/next-auth";
 
 const links = [
   {
@@ -18,7 +18,8 @@ const links = [
   },
 ]
 
-const Header = () => {
+const Header = async () => {
+  const session = await getServerSession(authOptions);
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center justify-between w-full bg-black text-white">
       <Link className="flex items-center justify-center gap-2 animated-gradient-text" href="/">
@@ -53,10 +54,6 @@ const Header = () => {
           </Link>
         ))}
       </nav>
-      <div className="ml-4">
-        <ButtonSignin />
-        {/* <ButtonAccount /> */}
-      </div>
     </header>
   );
 }
