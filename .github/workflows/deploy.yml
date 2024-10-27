@@ -16,10 +16,39 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
           chmod 700 ~/.ssh
+      - name: Render .env.local
+        run: |
+          touch .env.local
+          echo NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} >> .env.local
+          echo NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} >> .env.local
+          echo GOOGLE_ID=${{ secrets.GOOGLE_ID }} >> .env.local
+          echo GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }} >> .env.local
+          echo EMAIL_SERVER=${{ secrets.EMAIL_SERVER }} >> .env.local
+          echo MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }} >> .env.local
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env.local
+          echo STRIPE_PUBLIC_KEY=${{ secrets.STRIPE_PUBLIC_KEY }} >> .env.local
+          echo STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }} >> .env.local
+          echo STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }} >> .env.local
+          echo REPLICATE_API_TOKEN=${{ secrets.REPLICATE_API_TOKEN }} >> .env.local
+          echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} >> .env.local
+          echo RUNPOD_API_TOKEN=${{ secrets.RUNPOD_API_TOKEN }} >> .env.local
+          echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} >> .env.local
+          echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env.local
+          echo AWS_REGION=${{ secrets.AWS_REGION }} >> .env.local
+          echo AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }} >> .env.local
       - name: Install dependencies
         run: npm install
       - run: npm run build
       - run: echo "Build complete."
-      # - run: scp -r .next root@${{ secrets.DEPLOY_HOST }}:/src/thelandscapeai
       - name: Sync .next folder
-        run: rsync -avz --delete .next root@${{ secrets.DEPLOY_HOST }}:/src/thelandscapeai/.next
+        run: rsync -avz --delete .next/ root@${{ secrets.DEPLOY_HOST }}:/root/src/thelandscapeai/.next
+      - name: Sync .env.local
+        run: rsync -avz --delete .env.local root@${{ secrets.DEPLOY_HOST }}:/root/src/thelandscapeai/.env.local
+      - name: Restart server
+        run: |
+          ssh root@${{ secrets.DEPLOY_HOST }} "pkill next-server || true "
+          ssh root@${{ secrets.DEPLOY_HOST }} "tmux send-keys -t server 'npm run start' C-m"
+          echo "Server restarted."
+      - name: Check server online
+        run: |
+          curl -f https://thelandscapeai.com > /dev/null 2>&1 && echo "Server online." || exit 1
