@@ -13,10 +13,12 @@ const ButtonCheckout = ({
   priceId,
   isFeatured,
   mode = "payment",
+  init = true,
 }: {
   priceId: string;
   isFeatured: boolean;
   mode?: "payment" | "subscription";
+  init?: boolean;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -52,7 +54,7 @@ const ButtonCheckout = ({
       ) : (
        <Camera className="w-4 h-4"/>
       )}
-      Get {config?.appName}
+      {init ? `Get ${config?.appName}` : "Add credits"}
     </button>
   );
 };

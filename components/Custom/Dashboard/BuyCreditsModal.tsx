@@ -1,6 +1,7 @@
 import { Coins } from "lucide-react";
 import config from "@/config";
 import { Check, X } from "lucide-react";
+import ButtonCheckout from "@/components/ButtonCheckout";
 
 const BuyCreditsModal = () => {
   return (
@@ -37,8 +38,12 @@ const BuyCreditsModal = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="w-full h-12 flex items-center justify-center btn btn-primary mt-4">
-                  50 Credits
+                <div className="my-2 w-full">
+                  <ButtonCheckout
+                    priceId={config.stripe.plans[0].priceId}
+                    isFeatured={config.stripe.plans[0].isFeatured}
+                    init={false}
+                  />
                 </div>
               </div>
               <div className="flex flex-col h-full w-full bg-black/40 rounded-md p-4 justify-between items-center">
@@ -59,10 +64,12 @@ const BuyCreditsModal = () => {
                     </li>
                   ))}
                 </ul>
-                <div
-                  className="w-full h-12 flex items-center justify-center btn btn-primary mt-4 animated-gradient-background"
-                >
-                  250 Credits
+                <div className="my-2 w-full">
+                  <ButtonCheckout
+                    priceId={config.stripe.plans[1].priceId}
+                    isFeatured={config.stripe.plans[1].isFeatured}
+                    init={false}
+                  />
                 </div>
               </div>
             </div>
