@@ -25,7 +25,9 @@ jobs:
           echo GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }} >> .env.local
           echo EMAIL_SERVER=${{ secrets.EMAIL_SERVER }} >> .env.local
           echo MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }} >> .env.local
-          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env.local
+          echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env.local
+          echo MONGODB_USER=${{ secrets.MONGODB_USER }} >> .env.local
+          echo MONGODB_PASSWORD=${{ secrets.MONGODB_PASSWORD }} >> .env.local
           echo STRIPE_PUBLIC_KEY=${{ secrets.STRIPE_PUBLIC_KEY }} >> .env.local
           echo STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }} >> .env.local
           echo STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }} >> .env.local

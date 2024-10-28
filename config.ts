@@ -7,7 +7,7 @@ const config = {
   appName: "LandscapeAI",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.",
+    "Transform Your Yard",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "thelandscapeai.com",
   crisp: {
@@ -24,7 +24,7 @@ const config = {
         priceId:
           process.env.NODE_ENV === "development"
             ? "price_1QEFmWAwlcaw5Spz1b6Smaob"
-            : "price_456",
+            : "price_1QEjhFAwlcaw5SpzvWuJ5PXk",
         //  REQUIRED - Name of the plan, displayed on the pricing page
         name: "Basic",
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
@@ -46,7 +46,7 @@ const config = {
         priceId:
           process.env.NODE_ENV === "development"
             ? "price_1QEGR6Awlcaw5Spz4fJTSzbC"
-            : "price_456",
+            : "price_1QEjhBAwlcaw5SpzafIayQmT",
         // This plan will look different on the pricing page, it will be highlighted. You can only have one plan with isFeatured: true
         isFeatured: true,
         name: "Premium",

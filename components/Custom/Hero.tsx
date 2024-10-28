@@ -16,7 +16,7 @@ const HeroSection = () => {
           </p>
           <div className="flex items-center justify-center sm:justify-start gap-2">
             <CheckCircle className="text-green-500" />
-            Trusted by 10,000+ homeowners
+            Trusted by 1,000+ homeowners
           </div>
         </div>
         <Login />
