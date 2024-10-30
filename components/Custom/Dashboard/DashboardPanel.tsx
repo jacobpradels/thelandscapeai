@@ -105,7 +105,6 @@ const DashboardPanel = ({ user_id, credits, is_premium }: { user_id: string, cre
           style !== "None" ? `I want to create a ${style} landscape, which can be described as ${styles[style].join(", ")}. ` : "I want to create a landscape. "
             + `Additionally, I want to add the following features: ${optionalFeatures.join(", ")}. `
             + `Please modify this prompt: ${caption}`);
-        console.log(prompt);
         console.log("Starting generation");
         const response = await fetch('/api/main/generate/replicate', {
           method: 'POST',

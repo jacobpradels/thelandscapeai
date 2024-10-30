@@ -64,7 +64,7 @@ const GalleryImagePage = async ({ params }: { params: { id: string } }) => {
               {object.ExpiresString}
             </div>
           </div>
-          <div className="form-control">
+          {/* <div className="form-control">
             <label className="label cursor-pointer">
               <span className="label-text text-lg">Compare with original</span>
               <input type="checkbox" className="toggle" defaultChecked />
@@ -81,7 +81,7 @@ const GalleryImagePage = async ({ params }: { params: { id: string } }) => {
           <div className="btn btn-neutral animated-gradient-background">
             <Trash className="w-4 h-4" />
             Delete
-          </div>
+          </div> */}
         </div>
         <Preview selectedImage={`${config.s3.aws_prefix}/${id}`} outputImage={undefined} />
       </div>
