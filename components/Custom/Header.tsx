@@ -27,9 +27,7 @@ const authLinks = [
 
 const Header = async () => {
   const session = await getServerSession(authOptions);
-  if (session) {
-    links.push(...authLinks);
-  }
+  let totalLinks = session ? [...links, ...authLinks] : links;
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center justify-between w-full bg-black text-white">
       <Link className="flex items-center justify-center gap-2 animated-gradient-text" href="/">
@@ -45,7 +43,7 @@ const Header = async () => {
         <ul
           tabIndex={0}
           className="menu dropdown-content animated-gradient-background rounded-box z-[1] mt-4 w-52 p-2 shadow border-2 border-white">
-          {links.map((link) => (
+          {totalLinks.map((link) => (
             <li
               key={link.name}
               className="hover:bg-white hover:text-black rounded-md w-full"
@@ -58,7 +56,7 @@ const Header = async () => {
         </ul>
       </div>
       <nav className="ml-auto hidden sm:flex gap-4 sm:gap-6">
-        {links.map((link) => (
+        {totalLinks.map((link) => (
           <Link className="text-sm font-medium hover:underline underline-offset-4" key={link.name} href={link.href}>
             {link.name}
           </Link>
