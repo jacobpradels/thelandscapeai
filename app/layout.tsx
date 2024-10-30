@@ -25,6 +25,7 @@ export default function RootLayout({ children }: { children: any }) {
       {config.domainName && (
         <head>
           <PlausibleProvider domain={config.domainName} />
+          <script defer data-website-id="6721a250a95f87b91909d6d1" data-domain="thelandscapeai.com" src="https://datafa.st/js/script.js"></script>
         </head>
       )}
       <body className="bg-black">

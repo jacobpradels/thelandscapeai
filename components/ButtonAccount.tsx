@@ -7,7 +7,8 @@ import { useSession, signOut } from "next-auth/react";
 import React from "react";
 import apiClient from "@/libs/api";
 import getCredits from "@/libs/get_credits";
-import { Coins } from "lucide-react";
+import { Coins, HelpCircle } from "lucide-react";
+import Link from "next/link";
 
 // A button to show user some account actions
 //  1. Billing: open a Stripe Customer Portal to manage their billing (cancel subscription, update payment method, etc.).
@@ -133,6 +134,13 @@ const ButtonAccount = () => {
                     </svg>
                     Billing
                   </button>
+                  <Link
+                    href="mailto:support@thelandscapeai.com"
+                    className="flex items-center gap-2 duration-200 py-1.5 px-4 w-full rounded-lg font-medium"
+                  >
+                    <HelpCircle />
+                    Support
+                  </Link>
                   <button
                     className="flex items-center gap-2 hover:bg-error/20 hover:text-error duration-200 py-1.5 px-4 w-full rounded-lg font-medium"
                     onClick={handleSignOut}

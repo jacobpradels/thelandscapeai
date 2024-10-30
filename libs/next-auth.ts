@@ -61,6 +61,11 @@ export const authOptions: NextAuthOptionsExtended = {
     // It will be used in the login flow to display your logo. If you don't add it, it will look faded.
     logo: process.env.NODE_ENV === "production" ? `https://${config.domainName}/logoAndName.png` : `http://localhost:3000/logoAndName.png`,
   },
+  pages: {
+    verifyRequest: "/auth/verify-request",
+    signIn: "/auth/signin",
+    newUser: "/dashboard",
+  }
 };
 
 export default NextAuth(authOptions);

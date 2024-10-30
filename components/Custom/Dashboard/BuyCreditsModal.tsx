@@ -46,7 +46,9 @@ const BuyCreditsModal = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-col h-full w-full bg-black/40 rounded-md p-4 justify-between items-center">
+              <div className="flex flex-col h-full w-full bg-neutral-900 rounded-md p-4 justify-between items-center relative">
+                  <div className="absolute -z-10 h-[102%] w-[102%] animated-gradient-background -top-[1%] rounded-md">
+                  </div>
                 <div className="text-xl font-bold w-full text-left">
                   {config.stripe.plans[1].name}
                 </div>

@@ -18,8 +18,18 @@ const links = [
   },
 ]
 
+const authLinks = [
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+  },
+]
+
 const Header = async () => {
   const session = await getServerSession(authOptions);
+  if (session) {
+    links.push(...authLinks);
+  }
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center justify-between w-full bg-black text-white">
       <Link className="flex items-center justify-center gap-2 animated-gradient-text" href="/">
