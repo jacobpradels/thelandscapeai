@@ -26,8 +26,6 @@ jobs:
           echo EMAIL_SERVER=${{ secrets.EMAIL_SERVER }} >> .env.local
           echo MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }} >> .env.local
           echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env.local
-          echo MONGODB_USER=${{ secrets.MONGODB_USER }} >> .env.local
-          echo MONGODB_PASSWORD=${{ secrets.MONGODB_PASSWORD }} >> .env.local
           echo STRIPE_PUBLIC_KEY=${{ secrets.STRIPE_PUBLIC_KEY }} >> .env.local
           echo STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }} >> .env.local
           echo STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }} >> .env.local
@@ -48,8 +46,17 @@ jobs:
         run: rsync -avz --delete .env.local root@${{ secrets.DEPLOY_HOST }}:/root/src/thelandscapeai/.env.local
       - name: Restart server
         run: |
-          ssh root@${{ secrets.DEPLOY_HOST }} "pkill next-server || true "
-          ssh root@${{ secrets.DEPLOY_HOST }} "tmux send-keys -t server 'npm run start' C-m"
+          # Kill the specific server using the PID file if it exists
+          if [ -f /root/src/thelandscapeai.pid ]; then
+            pid=$(cat /root/src/thelandscapeai.pid)
+            if kill -0 $pid 2>/dev/null; then
+              kill $pid
+              sleep 2
+            fi
+          fi
+          
+          # Start the server in tmux and save its PID
+          ssh root@${{ secrets.DEPLOY_HOST }} "cd /root/src/thelandscapeai && tmux send-keys -t server 'npm run start & echo \$! > /root/src/thelandscapeai.pid' C-m"
           echo "Server restarted."
       - name: Check server online
         run: |

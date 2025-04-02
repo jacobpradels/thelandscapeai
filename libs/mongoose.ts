@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import User from "@/models/User";
 
 const connectMongo = async () => {
   if (!process.env.MONGODB_URI) {
@@ -8,7 +7,7 @@ const connectMongo = async () => {
     );
   }
   return mongoose
-    .connect(process.env.MONGODB_URI, { user: process.env.MONGODB_USER, pass: process.env.MONGODB_PASSWORD })
+    .connect(process.env.MONGODB_URI)
     .catch((e) => console.error("Mongoose Client Error: " + e.message));
 };
 
